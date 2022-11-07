@@ -57,7 +57,7 @@ public class Fluid
 
     public void step()
     {
-        int iter = 4;
+        int iter = this.iter;
         int N = this.size;
         float visc = this.visc;
         float diff = this.diff;
@@ -102,12 +102,14 @@ public class Fluid
         this.Vy[index] += amountY;
     }
 
+    //mixing and spreading out
     public void diffuse (int b, float[] x, float[] x0, float diff, float dt, int iter, int N)
     {
         float a = dt * diff * (N - 2) * (N - 2);
         lin_solve(b, x, x0, a, 1 + 6 * a, iter, N);
     }
 
+    //linear solve
     public void lin_solve(int b, float[] x,float[] x0,float a,float c, int iter, int N)
     {
         float cRecip = 1.0f / c;
@@ -130,6 +132,7 @@ public class Fluid
         }
     }
 
+    //sets the boxes to equilibrium, incompressible
     public void project(float[] velocX, float[] velocY, float[] p, float[] div, int iter, int N) {
         for (int j = 1; j < N - 1; j++) {
             for (int i = 1; i < N - 1; i++) {
@@ -160,6 +163,7 @@ public class Fluid
 
     }
 
+    //move the stuff
     public void advect(int b, float[] d, float[] d0, float[] velocX,float[] velocY, float dt, int N)
     {
         float i0, i1, j0, j1;
@@ -168,11 +172,11 @@ public class Fluid
         float dty = dt * (N - 2);
 
         float s0, s1, t0, t1;
-        float tmp1, tmp2, tmp3, x, y;
+        float tmp1, tmp2, x, y;
 
         float Nfloat = N - 2;
         float ifloat, jfloat;
-        int i, j, k;
+        int i, j;
 
         for (j = 1, jfloat = 1; j < N - 1; j++, jfloat++)
         {
@@ -211,7 +215,8 @@ public class Fluid
         set_bnd(b, d, N);
     }
 
-    public void set_bnd(int b,float[] x, int N)
+    //set bounding box
+    public void set_bnd(int b, float[] x, int N)
     {
         for (int i = 1; i < N - 1; i++)
         {

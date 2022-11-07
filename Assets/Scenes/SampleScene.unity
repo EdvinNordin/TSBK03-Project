@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1758409483}
+  N: 200
 --- !u!4 &601223891
 Transform:
   m_ObjectHideFlags: 0
@@ -361,15 +362,15 @@ PrefabInstance:
       objectReference: {fileID: 7482667652216324306, guid: 06cf485562618934480e886ea89b86ac, type: 3}
     - target: {fileID: 4454851834028089765, guid: 3d17700d04fee6c42b2bbcd5c0b14926, type: 3}
       propertyPath: m_Color.b
-      value: 0.735849
+      value: 0.8594651
       objectReference: {fileID: 0}
     - target: {fileID: 4454851834028089765, guid: 3d17700d04fee6c42b2bbcd5c0b14926, type: 3}
       propertyPath: m_Color.g
-      value: 0.58719045
+      value: 0.9716981
       objectReference: {fileID: 0}
     - target: {fileID: 4454851834028089765, guid: 3d17700d04fee6c42b2bbcd5c0b14926, type: 3}
       propertyPath: m_Color.r
-      value: 0.079832695
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4454851834028089765, guid: 3d17700d04fee6c42b2bbcd5c0b14926, type: 3}
       propertyPath: m_WasSpriteAssigned
