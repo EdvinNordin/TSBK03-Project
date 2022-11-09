@@ -98,6 +98,7 @@ public class Fluid
     public void addVelocity(int x, int y, float amountX, float amountY, int N)
     {
         int index = IX(x, y, N);
+
         this.Vx[index] += amountX;
         this.Vy[index] += amountY;
     }
@@ -218,12 +219,14 @@ public class Fluid
     //set bounding box
     public void set_bnd(int b, float[] x, int N)
     {
-        for (int i = 1; i < N - 1; i++)
+        for (int i = 1; i < N-1; i++)
         {
+
             x[IX(i, 0, N)] = b == 2 ? -x[IX(i, 1, N)] : x[IX(i, 1, N)];
             x[IX(i, N - 1, N)] = b == 2 ? -x[IX(i, N - 2, N)] : x[IX(i, N - 2, N)];
+
         }
-        for (int j = 1; j < N - 1; j++)
+        for (int j = 1; j < N-1; j++)
         {
             x[IX(0, j, N)] = b == 1 ? -x[IX(1, j, N)] : x[IX(1, j, N)];
             x[IX(N - 1, j, N)] = b == 1 ? -x[IX(N - 2, j, N)] : x[IX(N - 2, j, N)];
@@ -233,6 +236,7 @@ public class Fluid
         x[IX(0, N - 1, N)] = 0.5f * (x[IX(1, N - 1, N)] + x[IX(0, N - 2, N)]);
         x[IX(N - 1, 0, N)] = 0.5f * (x[IX(N - 2, 0, N)] + x[IX(N - 1, 1, N)]);
         x[IX(N - 1, N - 1, N)] = 0.5f * (x[IX(N - 2, N - 1, N)] + x[IX(N - 1, N - 2, N)]);
+       //x[IX(0, N - 1, N)] = 1000f; //y,x,N
     }
 
     public float getDensity(int i)
@@ -245,5 +249,18 @@ public class Fluid
         this.density[i] -= amount;
         return this.density[i];
     }
+    public float getVelocity(int i, int j)
+    {
+        float x = this.Vx[IX(i,j,N)];
+        float y = this.Vy[IX(i, j, N)];
+        float dir = Mathf.Atan(y / x);
 
+        if (x == 0)
+        {
+            dir = Mathf.Atan(y / (x + 0.00000001f));
+        }
+
+
+        return dir;
+    }
 }
